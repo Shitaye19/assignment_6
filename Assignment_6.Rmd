@@ -178,6 +178,23 @@ mtcars2<-mtcars1 %>%
 
 
 
+```{r}
+
+ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
+   
+   geom_point(aes(size = hp, color = cyl)) + geom_text(aes(label = rowname), hjust =0) +
+                
+   xlim(10, 40)+
+     
+   labs(x = "Miles per gallon fuel consumption",
+        y = "")
+ 
+```
+
+
+
+
+
 **Hint1: Start by transforming the data frame into the following format.**
 
 * Convert rownames to a column. (`rownames_to_column() might be helpful)
