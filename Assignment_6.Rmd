@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-##**Instructions: Please read through this before you begin**
+## **Instructions: Please read through this before you begin**
 
 
 * This assignment is due by **10pm on Monday 11/02/20.**
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * First, load all the required packages with the following code. Install them if they are not installed yet.
 
 
-```{r}
+```{r, message = F}
 
 library(tidyverse)
 library(knitr)
@@ -40,7 +40,7 @@ library(knitr)
 
 **Read in some relational datasets from GitHub**
 
-```{r}
+```{r, message=FALSE}
 
 ## for 4.1
 toy1 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/toy_one.csv')

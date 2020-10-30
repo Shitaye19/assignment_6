@@ -2,7 +2,7 @@ Assignment 6: Relational data plus revisiting data wrangling and
 visualization
 ================
 
-\#\#**Instructions: Please read through this before you begin**
+## **Instructions: Please read through this before you begin**
 
   - This assignment is due by **10pm on Monday 11/02/20.**
 
@@ -34,20 +34,6 @@ visualization
 
 ``` r
 library(tidyverse)
-```
-
-    ## ── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.3.0 ──
-
-    ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-    ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
-    ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-    ## ✓ readr   1.3.1     ✓ forcats 0.5.0
-
-    ## ── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 library(knitr)
 ```
 
@@ -62,119 +48,24 @@ course STOR 290: Introduction to Data Science.
 ``` r
 ## for 4.1
 toy1 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/toy_one.csv')
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   key = col_character(),
-    ##   value = col_character()
-    ## )
-
-``` r
 toy2 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/toy_two.csv')
-```
 
-    ## Parsed with column specification:
-    ## cols(
-    ##   label = col_character(),
-    ##   animal = col_character()
-    ## )
-
-``` r
 ## for 4.2
 play1 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/play_one.csv')
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   key = col_character(),
-    ##   label = col_character(),
-    ##   value = col_double()
-    ## )
-
-``` r
 play2 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/play_two.csv')
-```
 
-    ## Parsed with column specification:
-    ## cols(
-    ##   key = col_character(),
-    ##   label = col_character(),
-    ##   othervalue = col_double()
-    ## )
-
-``` r
 ## for 4.3
 banking_account_types <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/banking_account_types.csv')
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   account_id = col_character(),
-    ##   account_type = col_character()
-    ## )
-
-``` r
 banking_transactions <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/banking_transactions.csv')
-```
 
-    ## Parsed with column specification:
-    ## cols(
-    ##   id = col_character(),
-    ##   transaction_amount = col_double()
-    ## )
-
-``` r
 ## for 4.4
 crime_arrests <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/crime_arrests.csv')
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   State = col_character(),
-    ##   Murder = col_double(),
-    ##   Assault = col_double(),
-    ##   UrbanPop = col_double(),
-    ##   Rape = col_double()
-    ## )
-
-``` r
 crime_wealth <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/crime_wealth.csv')
-```
 
-    ## Parsed with column specification:
-    ## cols(
-    ##   Rank = col_double(),
-    ##   State = col_character(),
-    ##   `2014` = col_double(),
-    ##   `2010` = col_double(),
-    ##   `2009` = col_double(),
-    ##   `2007` = col_double()
-    ## )
-
-``` r
 ## for 4.5
 titanic_outcomes <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/titanic_outcomes.csv')
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   PID = col_double(),
-    ##   Survived = col_double()
-    ## )
-
-``` r
 titanic_person_features <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/titanic_person_features.csv')
 ```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   PID = col_double(),
-    ##   Name = col_character(),
-    ##   PClass = col_character(),
-    ##   Age = col_double(),
-    ##   Sex = col_character()
-    ## )
 
 **1.1 Join the `toy` datasets. Only keep rows that have matches in the
 other dataset. Show the resulting dataset using `kable()`.**
@@ -257,10 +148,14 @@ titanic_person_features2 <- titanic_person_features %>%
   select(PID, PClass) 
 #View(titanic_person_features2)
 
-titanic_person_features2 %>% 
-  left_join(titanic_outcomes, by = "PID") %>% 
-  group_by(PClass) %>% 
-  ggplot(mapping = aes(x = PClass, fill = Survived)) +
+titanic_person_features3 <-  titanic_person_features2 %>% 
+  left_join(titanic_outcomes, by = "PID") 
+titanic_person_features3 $Survived<-as.factor(titanic_person_features3 $Survived)
+
+titanic_person_features3 %>% 
+group_by(PClass) %>% 
+ ggplot(mapping = aes(x = PClass, fill = Survived)) +
+  xlim("1st","2nd", "3rd")+
   geom_bar() 
 ```
 
@@ -286,11 +181,11 @@ kable(head(mtcars))
 | Hornet Sportabout | 18.7 |   8 |  360 | 175 | 3.15 | 3.440 | 17.02 |  0 |  0 |    3 |    2 |
 | Valiant           | 18.1 |   6 |  225 | 105 | 2.76 | 3.460 | 20.22 |  1 |  0 |    3 |    1 |
 
-\*\*Reproduce the following plot, which shows the miles per gallon (mpg)
+**Reproduce the following plot, which shows the miles per gallon (mpg)
 of car models on the x axis (see hints below). Different models are
 ordered on the y axis according to their `mpg` and their names are shown
 next to the data points. Also, the size of each data point maps to its
-horse power (`hp`), and the color maps to number of cylinders (`cyl`).
+horse power (`hp`), and the color maps to number of cylinders (`cyl`).**
 
 ``` r
 mtcars1<-rownames_to_column(mtcars) 
@@ -308,6 +203,19 @@ mtcars2<-mtcars1 %>%
 | Hornet 4 Drive    | 21.4 |         21 |   6 | 110 |
 | Hornet Sportabout | 18.7 |         15 |   8 | 175 |
 | Valiant           | 18.1 |         14 |   6 | 105 |
+
+``` r
+ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
+   
+   geom_point(aes(size = hp, color = cyl)) + geom_text(aes(label = rowname), hjust =0) +
+                
+   xlim(10, 40)+
+     
+   labs(x = "Miles per gallon fuel consumption",
+        y = "")
+```
+
+![](Assignment_6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 **Hint1: Start by transforming the data frame into the following
 format.**
