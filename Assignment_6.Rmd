@@ -36,7 +36,47 @@ library(knitr)
 
 ## **Exercise 1: Join functions**
 
+**Acknowledgments:** The datasets and some of the questions for this exercise has been borrowed (with permission) from lain Carmichael's course STOR 290: Introduction to Data Science.
 
+**Read in some relational datasets from GitHub**
+
+```{r}
+
+## for 4.1
+toy1 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/toy_one.csv')
+toy2 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/toy_two.csv')
+
+## for 4.2
+play1 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/play_one.csv')
+play2 <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/play_two.csv')
+
+## for 4.3
+banking_account_types <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/banking_account_types.csv')
+banking_transactions <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/banking_transactions.csv')
+
+## for 4.4
+crime_arrests <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/crime_arrests.csv')
+crime_wealth <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/crime_wealth.csv')
+
+## for 4.5
+titanic_outcomes <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/titanic_outcomes.csv')
+titanic_person_features <- read_csv('https://raw.githubusercontent.com/idc9/stor390/master/data/joins/titanic_person_features.csv')
+
+
+```
+
+
+
+
+**1.1 Join the `toy` datasets. Only keep rows that have matches in the other dataset. Show the resulting dataset using `kable()`.**
+
+```{r}
+toy3<-toy1 %>% 
+  left_join(toy2, c("key" = "label"))%>% 
+  kable()
+
+
+```
 
 
 
