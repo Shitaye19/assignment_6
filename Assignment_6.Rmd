@@ -1,0 +1,24 @@
+---
+title: "Assignment 6: Relational data plus revisiting data wrangling and visualization"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+##**Instructions: Please read through this before you begin**
+
+
+* This assignment is due by **10pm on Monday 11/02/20.**
+
+* Please **reproduce this markdown template.** Pay attention to all the formating in this file, including bullet points, bolded characters, inserted code chunks, headings, text colors, blank lines, and etc.
+
+* For excercise 1 use the apppropriate `join` function to join some relational datasets, and use the resulting datasets to answer some questions.
+
+
+
+
+
+
