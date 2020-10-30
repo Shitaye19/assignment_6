@@ -187,7 +187,8 @@ ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
    xlim(10, 40)+
      
    labs(x = "Miles per gallon fuel consumption",
-        y = "")
+        y = "")+
+  theme_bw()
  
 ```
 
