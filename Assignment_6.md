@@ -36,14 +36,14 @@ visualization
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
     ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
     ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
     ## ✓ readr   1.3.1     ✓ forcats 0.5.0
 
-    ## ── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -216,3 +216,100 @@ kable()
 | ttt | xxx   |     7 |        222 |
 | vvv | uuu   |     8 |        333 |
 | vvv | uuu   |     8 |        555 |
+
+**1.3. Plot the distribution of total transaction amount per account ID
+grouped by different account types with a boxplot shown below, using the
+`banking` datasets.**
+
+``` r
+banking_account_types %>% 
+  left_join(banking_transactions, c("account_id" = "id")) %>% 
+  group_by(account_type, account_id) %>% 
+  summarise(total_transaction_ammount = sum(transaction_amount)) %>% 
+  ggplot(mapping = aes(x = account_type, y = total_transaction_ammount)) +
+  geom_boxplot(outlier.shape = NA)+
+  geom_jitter(height = 0)
+```
+
+![](Assignment_6_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+**1.4 Which state is in the `crime_wealth`dataset but not the
+`crime_arrests` dataset? Use a join function to answer this question**
+
+District of Columbia is in crime\_wealth dataset but not in
+crime\_arrests data set.
+
+``` r
+crime_wealth %>% 
+  anti_join(crime_arrests, by = "State") %>% 
+  kable()
+```
+
+| Rank | State                |  2014 |  2010 |  2009 |  2007 |
+| ---: | :------------------- | ----: | ----: | ----: | ----: |
+|    5 | District of Columbia | 65124 | 63098 | 57214 | 52746 |
+
+**1.5 OPTIONAL:Plot the number of passenger who did and did not survive,
+grouped by their classes, using`titanic` data sets**
+
+``` r
+titanic_person_features2 <- titanic_person_features %>% 
+  select(PID, PClass) 
+#View(titanic_person_features2)
+
+titanic_person_features2 %>% 
+  left_join(titanic_outcomes, by = "PID") %>% 
+  group_by(PClass) %>% 
+  ggplot(mapping = aes(x = PClass, fill = Survived)) +
+  geom_bar() 
+```
+
+![](Assignment_6_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+\#\#**Excercise 2: Fuel Efficeincy of Car Models**
+
+This exercise uses the `mtcars` dataset. It was extracted from the 1974
+Motor Trend US magazine, and comprises fuel consumption and 10 aspects
+of automobile design and performance for 32 automobiles (1973-74
+models).
+
+``` r
+kable(head(mtcars))
+```
+
+|                   |  mpg | cyl | disp |  hp | drat |    wt |  qsec | vs | am | gear | carb |
+| :---------------- | ---: | --: | ---: | --: | ---: | ----: | ----: | -: | -: | ---: | ---: |
+| Mazda RX4         | 21.0 |   6 |  160 | 110 | 3.90 | 2.620 | 16.46 |  0 |  1 |    4 |    4 |
+| Mazda RX4 Wag     | 21.0 |   6 |  160 | 110 | 3.90 | 2.875 | 17.02 |  0 |  1 |    4 |    4 |
+| Datsun 710        | 22.8 |   4 |  108 |  93 | 3.85 | 2.320 | 18.61 |  1 |  1 |    4 |    1 |
+| Hornet 4 Drive    | 21.4 |   6 |  258 | 110 | 3.08 | 3.215 | 19.44 |  1 |  0 |    3 |    1 |
+| Hornet Sportabout | 18.7 |   8 |  360 | 175 | 3.15 | 3.440 | 17.02 |  0 |  0 |    3 |    2 |
+| Valiant           | 18.1 |   6 |  225 | 105 | 2.76 | 3.460 | 20.22 |  1 |  0 |    3 |    1 |
+
+\*\*Reproduce the following plot, which shows the miles per gallon (mpg)
+of car models on the x axis (see hints below). Different models are
+ordered on the y axis according to their `mpg` and their names are shown
+next to the data points. Also, the size of each data point maps to its
+horse power (`hp`), and the color maps to number of cylinders (`cyl`).
+
+\*\*Hint1: Start by transforming the data frame into the following
+format.
+
+  - Convert rownames to a column. (\`rownames\_to\_column() might be
+    helpful)
+  - create a new varible which shows the order of car models based on
+    their mpg. (`row_number()`) might be helpful).
+
+the first few rows of this new data frame might look like the following.
+
+**Hint2: When making the plot, pay attention to the following elements
+of the plot that need to be specified.**
+
+  - Horizontal adjustment of the text labels (“hjust” option in
+    `geom_text()`)
+
+  - The range of the x-axis (`xlim()`)
+
+  - x-axis label and legend titles (`labs()`)
+
+  - The removal of the y-axis (`theme()`)

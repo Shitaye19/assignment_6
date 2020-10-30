@@ -120,6 +120,62 @@ crime_wealth %>%
 ```
 
 
+**1.5 OPTIONAL:****Plot the number of passenger who did and did not survive, grouped by their classes, using`titanic` data sets**
+
+
+```{r}
+
+titanic_person_features2 <- titanic_person_features %>% 
+  select(PID, PClass) 
+#View(titanic_person_features2)
+
+titanic_person_features2 %>% 
+  left_join(titanic_outcomes, by = "PID") %>% 
+  group_by(PClass) %>% 
+  ggplot(mapping = aes(x = PClass, fill = Survived)) +
+  geom_bar() 
+
+```
+
+
+
+##**Excercise 2: Fuel Efficeincy of Car Models**
+
+This exercise uses the `mtcars` dataset. It was extracted from the 1974 Motor Trend US 
+magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).
+
+```{r}
+kable(head(mtcars))
+```
+
+
+**Reproduce the following plot, which shows the miles per gallon (mpg) of car models on the x axis (see hints below). Different models are ordered on the y axis according to their `mpg` and their names are shown next to the data points. Also, the size of each data point maps to its horse power (`hp`), and the color maps to number of cylinders (`cyl`). 
+
+
+**Hint1: Start by transforming the data frame into the following format.
+
+* Convert rownames to a column. (`rownames_to_column() might be helpful)
+* create a new varible which shows the order of car models based on their mpg. (`row_number()`) might be helpful).
+
+the first few rows of this new data frame might look like the following.
+
+
+
+
+**Hint2: When making the plot, pay attention to the following elements of the plot that need to be specified.**
+
+* Horizontal adjustment of the text labels ("hjust" option in `geom_text()`)
+
+* The range of the x-axis (`xlim()`)
+
+* x-axis label and legend titles (`labs()`)
+
+* The removal of the y-axis (`theme()`)
+
+
+
+
+
 
 
 
