@@ -172,7 +172,7 @@ mtcars2<-mtcars1 %>%
   mutate(mpg_order = row_number(mtcars1$mpg)) %>% 
   select(rowname,mpg, mpg_order, cyl, hp) 
   kable(head(mtcars2))
-
+mtcars2$cyl <-  as.factor(mtcars2$cyl)
 
 ```
 
@@ -182,7 +182,7 @@ mtcars2<-mtcars1 %>%
 
 ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
    
-   geom_point(aes(size = hp, color = cyl)) + geom_text(aes(label = rowname), hjust =0) +
+   geom_point(aes(color = cyl, size = hp)) + geom_text(aes(label = rowname), hjust =0) +
                 
    xlim(10, 40)+
      
