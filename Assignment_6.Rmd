@@ -15,7 +15,38 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Please **reproduce this markdown template.** Pay attention to all the formating in this file, including bullet points, bolded characters, inserted code chunks, headings, text colors, blank lines, and etc.
 
-* For excercise 1 use the apppropriate `join` function to join some relational datasets, and use the resulting datasets to answer some questions.
+* For exercise 1 use the apppropriate `join` function to join some relational datasets, and use the resulting datasets to answer some questions.
+
+* Have all your code embedded within the R markdown file, and show both of your **code** and **plots** in the knitted markdown file.
+
+* Use R Markdown functionalities to **hide messages and warnings when needed.** (Suggesstion: messages and warnings can often be informative and important, so please examine them carefully and only turn them off when you finish the exercise).
+
+* Please name your R markdown file `assignment_6.Rmd` and the knitted markdown `assignment_6.md.` Please upload both files using your personal GitHub repository for this class. 
+
+* First, load all the required packages with the following code. Install them if they are not installed yet.
+
+
+```{r}
+
+library(tidyverse)
+library(knitr)
+
+```
+
+
+## **Exercise 1: Join functions**
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
