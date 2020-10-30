@@ -181,7 +181,8 @@ other dataset. Show the resulting dataset using `kable()`.**
 
 ``` r
 toy1 %>% 
-  left_join(toy2, c("key" = "label"))%>% 
+  left_join(toy2, c("key" = "label")) %>% 
+  na.omit() %>% 
   kable()
 ```
 
@@ -191,7 +192,27 @@ toy1 %>%
 | aaa | this  | tiger    |
 | bbb | that  | dog      |
 | bbb | that  | hampster |
-| ccc | other | NA       |
 | ddd | thing | horse    |
 | ddd | one   | horse    |
-| fff | two   | NA       |
+
+\*\*1.2. Join the `play` datasets by `key` and `label`. Keep all rows
+from both datasets. Show the resulting dataset using `kable()`.
+
+``` r
+play1 %>% 
+  left_join(play2, by = c("key","label")) %>% 
+kable()
+```
+
+| key | label | value | othervalue |
+| :-- | :---- | ----: | ---------: |
+| aaa | rrr   |     1 |        111 |
+| aaa | rrr   |     1 |        444 |
+| rrr | aaa   |     2 |         NA |
+| ttt | xxx   |     3 |        222 |
+| vvv | uuu   |     4 |        333 |
+| vvv | uuu   |     4 |        555 |
+| rrr | aaa   |     6 |         NA |
+| ttt | xxx   |     7 |        222 |
+| vvv | uuu   |     8 |        333 |
+| vvv | uuu   |     8 |        555 |
