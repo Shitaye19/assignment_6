@@ -123,17 +123,30 @@ crime_wealth %>%
 **1.5 OPTIONAL:****Plot the number of passenger who did and did not survive, grouped by their classes, using`titanic` data sets**
 
 
-```{r}
+```{r,message= F, warning = F}
+
 
 titanic_person_features2 <- titanic_person_features %>% 
   select(PID, PClass) 
 #View(titanic_person_features2)
 
-titanic_person_features2 %>% 
-  left_join(titanic_outcomes, by = "PID") %>% 
-  group_by(PClass) %>% 
-  ggplot(mapping = aes(x = PClass, fill = Survived)) +
+titanic_person_features3 <-  titanic_person_features2 %>% 
+  left_join(titanic_outcomes, by = "PID") 
+titanic_person_features3 $Survived<-as.factor(titanic_person_features3 $Survived)
+
+titanic_person_features3 %>% 
+group_by(PClass) %>% 
+ ggplot(mapping = aes(x = PClass, fill = Survived)) +
+  xlim("1st","2nd", "3rd")+
   geom_bar() 
+
+  
+```
+
+
+
+```{r}
+
 
 ```
 
@@ -149,7 +162,7 @@ kable(head(mtcars))
 ```
 
 
-**Reproduce the following plot, which shows the miles per gallon (mpg) of car models on the x axis (see hints below). Different models are ordered on the y axis according to their `mpg` and their names are shown next to the data points. Also, the size of each data point maps to its horse power (`hp`), and the color maps to number of cylinders (`cyl`). 
+**Reproduce the following plot, which shows the miles per gallon (mpg) of car models on the x axis (see hints below). Different models are ordered on the y axis according to their `mpg` and their names are shown next to the data points. Also, the size of each data point maps to its horse power (`hp`), and the color maps to number of cylinders (`cyl`).**
 
 
 ```{r}
