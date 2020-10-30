@@ -151,10 +151,7 @@ kable(head(mtcars))
 
 **Reproduce the following plot, which shows the miles per gallon (mpg) of car models on the x axis (see hints below). Different models are ordered on the y axis according to their `mpg` and their names are shown next to the data points. Also, the size of each data point maps to its horse power (`hp`), and the color maps to number of cylinders (`cyl`). 
 
-```{r}
-rownames_to_column(mtcars) %>% 
-  mutate(row_number())
-```
+
 ```{r}
 
 mtcars1<-rownames_to_column(mtcars) 
