@@ -205,14 +205,20 @@ mtcars2<-mtcars1 %>%
 | Valiant           | 18.1 |         14 |   6 | 105 |
 
 ``` r
+mtcars2$cyl <-  as.factor(mtcars2$cyl)
+```
+
+``` r
 ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
    
-   geom_point(aes(size = hp, color = cyl)) + geom_text(aes(label = rowname), hjust =0) +
+   geom_point(aes(color = cyl, size = hp)) + geom_text(aes(label = rowname), hjust =-0.05) +
                 
    xlim(10, 40)+
      
    labs(x = "Miles per gallon fuel consumption",
-        y = "")
+          color = "number of cylinders", size = "horsepower")+
+    theme_classic()+
+  theme(axis.line.y = element_blank(), axis.title.y = element_blank(),axis.text.y = element_blank(), axis.ticks.y = element_blank())
 ```
 
 ![](Assignment_6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->

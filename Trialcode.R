@@ -147,9 +147,9 @@ theme_bw()
   
 
 ###
- ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname, size = hp))+#, color = cyl)+
+ ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname, size = hp))+ #, color = cyl)+
    
-   geom_point(aes(color = cyl)) + geom_text(aes(label = rowname), hjust =0)+
+   geom_point() + geom_text(aes(label = rowname), hjust =0)+
    xlim(10, 40)+
    labs(x = "Miles per gallon fuel consumption",
         y = "")
@@ -158,6 +158,19 @@ theme_bw()
    #geom_point(aes(x = mpg, y = mpg_order))+
    #geom_label(mapping= aes(x = mpg, y = mpg_order, label = rowname))+
 
+ $##what if geom_point size and color included here
+ 
+ 
+ ggplot(mtcars2, aes(x = mpg, y = mpg_order, label = rowname))+  #, color = cyl)+
+   
+   geom_point(aes(size = hp, color = cyl)) + geom_text(aes(label = rowname), hjust =0) +
+                
+   xlim(10, 40)+
+     
+   labs(x = "Miles per gallon fuel consumption",
+        y = "")
+ 
+ 
  
 
  
